@@ -56,4 +56,9 @@ public class MainPresenter implements MainMVP.Presenter {
 		}
 	}
 
+	@Override
+	public void onRefresh() {
+		this.getFlickrPhotos();
+	}
+
 }
