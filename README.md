@@ -2,6 +2,7 @@
 
 ## [TODO]
 ### Minimum Viable Product
+- List that shows Flickr Photos
 - Add pull to refresh to the list
 - Detail view
 - Photo search by text 
@@ -12,7 +13,3 @@
 - GridView mode.
 - Animations.
 - Third party libraries.
-
-## DONE
-### Minimum Viable Product
-- List that shows Flickr Photos
