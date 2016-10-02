@@ -1,5 +1,6 @@
 package com.baldev.flickrviewer.modules;
 
+import com.baldev.flickrviewer.model.MainModel;
 import com.baldev.flickrviewer.mvp.MainMVP.Model;
 import com.baldev.flickrviewer.mvp.MainMVP.Presenter;
 import com.baldev.flickrviewer.mvp.MainMVP.View;
@@ -17,14 +18,13 @@ public class MainModule {
 	}
 
 	@Provides
-	public View provideView() {
+    public View provideView() {
 		return view;
 	}
 
 	@Provides
 	public Model provideModel() {
-		return null;
-		//return new MainModel();
+		return new MainModel();
 	}
 
 	@Provides
