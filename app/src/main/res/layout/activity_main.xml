@@ -25,10 +25,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/title"/>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:contentDescription="@null"/>
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/my_image_view"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:placeholderImage="@mipmap/ic_launcher"
+        />
 </LinearLayout>

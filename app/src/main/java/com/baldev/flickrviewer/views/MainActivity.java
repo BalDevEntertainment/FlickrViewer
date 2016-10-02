@@ -2,7 +2,6 @@ package com.baldev.flickrviewer.views;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baldev.flickrviewer.R;
@@ -11,6 +10,7 @@ import com.baldev.flickrviewer.model.DTOs.FlickrPhoto;
 import com.baldev.flickrviewer.modules.MainModule;
 import com.baldev.flickrviewer.mvp.MainMVP;
 import com.baldev.flickrviewer.mvp.MainMVP.Presenter;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends Activity implements MainMVP.View {
 
-	@BindView(R.id.imageView) ImageView flickrPhoto;
+	@BindView(R.id.my_image_view) SimpleDraweeView flickrPhoto;
 	@BindView(R.id.id) TextView flickrPhotoId;
 	@BindView(R.id.title) TextView flickrPhotoTitle;
 
@@ -57,6 +57,7 @@ public class MainActivity extends Activity implements MainMVP.View {
 			FlickrPhoto photo = photos.get(0);
 			flickrPhotoId.setText(photo.getID());
 			flickrPhotoTitle.setText(photo.getTitle());
+			flickrPhoto.setImageURI(photo.getURI());
 		}
 	}
 
