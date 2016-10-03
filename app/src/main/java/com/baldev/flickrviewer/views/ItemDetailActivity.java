@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.baldev.flickrviewer.R;
 import com.baldev.flickrviewer.components.DaggerItemDetailComponent;
@@ -31,6 +32,12 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailM
 	@BindView(R.id.toolbar) Toolbar toolbar;
 	@BindView(R.id.collapsing_toolbar_layout) CollapsingToolbarLayout collapsingToolbarLayout;
 
+	@BindView(R.id.text_view_uploaded_on) TextView uploadedOn;
+	@BindView(R.id.text_item_detail_owner) TextView owner;
+	@BindView(R.id.text_item_detail_description) TextView description;
+	@BindView(R.id.text_item_detail_views) TextView views;
+	@BindView(R.id.text_item_detail_tags) TextView tags;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,7 +61,11 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailM
 
 	@Override
 	public void onDetailsLoaded(FlickrPhotoDetail photo) {
-
+		this.uploadedOn.setText(photo.getUploadedOnFormattedDate());
+		this.owner.setText(photo.getOwner());
+		this.description.setText(photo.getDescription());
+		this.views.setText(String.valueOf(photo.getViewQty()));
+		//this.tags.setText(photo.getTags());
 	}
 
 	private void setAlreadyRetrievedData() {

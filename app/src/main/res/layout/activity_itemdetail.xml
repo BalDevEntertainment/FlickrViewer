@@ -9,7 +9,7 @@
     <android.support.design.widget.AppBarLayout
 
         android:layout_width="match_parent"
-        android:layout_height="192dp"
+        android:layout_height="@dimen/collapsible_header_size"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -47,13 +47,62 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lorem"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:padding="@dimen/spacing_normal">
+
+            <TextView
+                style="@style/text_item_detail_title"
+                android:text="@string/item_detail_date"/>
+
+            <TextView
+                android:id="@+id/text_view_uploaded_on"
+                style="@style/text_item_detail_value"
+                tools:text="@string/item_detail_date"/>
+
+            <TextView
+                style="@style/text_item_detail_title"
+                android:text="@string/item_detail_owner"/>
+
+            <TextView
+                android:id="@+id/text_item_detail_owner"
+                style="@style/text_item_detail_value"
+                tools:text="@string/item_detail_owner"/>
+
+            <TextView
+                style="@style/text_item_detail_title"
+                android:text="@string/item_detail_description"/>
+
+            <TextView
+                android:id="@+id/text_item_detail_description"
+                style="@style/text_item_detail_value"
+                tools:text="@string/item_detail_description"/>
+
+            <TextView
+                style="@style/text_item_detail_title"
+                android:text="@string/item_detail_views"/>
+
+            <TextView
+                android:id="@+id/text_item_detail_views"
+                style="@style/text_item_detail_value"
+                tools:text="@string/item_detail_views"/>
+
+            <TextView
+                style="@style/text_item_detail_title"
+                android:text="@string/item_detail_tags"/>
+
+            <TextView
+                android:id="@+id/text_item_detail_tags"
+                style="@style/text_item_detail_value"
+                tools:text="@string/item_detail_tags"/>
+        </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
 

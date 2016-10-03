@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">FlickrViewer</string>
     <string name="key_id">ID</string>
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut euismod neque, ut blandit metus. Ut sit amet blandit eros, vel molestie eros. Proin congue sem vestibulum sem pharetra pellentesque. Vivamus quis cursus nulla, a gravida lorem. Curabitur tincidunt cursus mattis. Suspendisse sagittis id nunc eu vulputate. Proin elit felis, tempor at posuere ut, gravida quis mi. Nulla porta eu diam id elementum. Vestibulum id bibendum elit. Mauris ut nunc lacus.
 
-Donec at finibus sem, eleifend tempor purus. Phasellus ultrices augue felis, nec fringilla diam lobortis a. Quisque tincidunt, est eget convallis feugiat, nulla tellus congue urna, sed efficitur turpis mauris non velit. Sed pulvinar porta sapien, eu consequat ex sodales a. Quisque eleifend volutpat mauris, et viverra ante. Proin id ante fringilla, sodales odio nec, sagittis ex. Aenean pulvinar tempor eros sit amet rhoncus. Nam placerat tortor sed leo sagittis bibendum. Duis ipsum magna, rutrum vitae erat nec, porttitor pellentesque ante. Suspendisse aliquet orci in metus placerat, id fermentum purus auctor. Mauris eu neque urna. Nulla ut congue justo, tincidunt egestas lacus. Integer metus neque, imperdiet ac porta sit amet, bibendum eget lacus.
 
-Suspendisse suscipit nunc sed magna lobortis fermentum. Cras cursus ut metus tristique euismod. Aliquam euismod sapien sollicitudin odio imperdiet egestas. Etiam hendrerit quam vitae sem consectetur eleifend in eget dui. Nulla facilisi. Fusce pharetra molestie tellus eu venenatis. Mauris lacinia odio urna, eget facilisis dolor pharetra ut. Integer aliquam neque tortor, eget dictum ex ultricies non. Suspendisse potenti.
+    <!-- Item detail activity -->
+    <string name="item_detail_date">"Uploaded on"</string>
+    <string name="item_detail_owner">"Owner"</string>
+    <string name="item_detail_description">"Description"</string>
+    <string name="item_detail_views">"Views"</string>
+    <string name="item_detail_tags">"Tags"</string>
 
-In vitae eleifend felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Maecenas ut libero mi. Fusce condimentum, velit et commodo eleifend, mauris diam pellentesque ex, a lacinia purus sapien id libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam varius felis mauris, vitae sagittis diam imperdiet id. Fusce molestie quis urna quis mollis. Sed id sodales risus.
-
-Fusce feugiat nulla non magna varius, vitae feugiat neque fringilla. Praesent et tristique tellus. Phasellus velit nisi, fermentum sed velit eu, ultrices tristique sapien. In efficitur luctus vehicula. Vestibulum viverra dui nec blandit dapibus. Nullam accumsan metus elit, non mattis justo interdum non. Duis rutrum maximus risus sed volutpat. Mauris ultricies, arcu sit amet blandit placerat, ipsum justo dictum nisl, ut rutrum lacus turpis in libero. In tempus posuere turpis, in aliquet orci convallis nec. In lorem turpis, scelerisque ut leo vitae, sodales maximus urna. Nam tincidunt, nunc vel gravida mattis, nisi nulla aliquam felis, quis sollicitudin justo purus at nunc. Ut quis hendrerit est, ut dignissim lectus.</string>
 </resources>

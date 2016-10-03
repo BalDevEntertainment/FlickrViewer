@@ -34,12 +34,8 @@ public class FlickrPhotoDetail {
 	@SerializedName("views")
 	private int views;
 
-	public List<Tag> getTags() {
-		return tags;
-	}
-
 	@SerializedName("tags")
-	private List<Tag> tags;
+	private TagList tagList;
 
 	public String getID() {
 		return this.ID;
@@ -66,7 +62,7 @@ public class FlickrPhotoDetail {
 		return this.timestamp;
 	}
 
-	public String getFormattedDate() {
+	public String getUploadedOnFormattedDate() {
 		return FlickrViewerUtils.formatEpoch(this.getTimestamp());
 	}
 
@@ -77,11 +73,15 @@ public class FlickrPhotoDetail {
 
 	public String getDescription() {
 		//TODO implement nullable pattern
-		return description.getText();
+		return this.description.getText();
 	}
 
-	public int getViews() {
-		return views;
+	public int getViewQty() {
+		return this.views;
+	}
+
+	public TagList getTagList() {
+		return this.tagList;
 	}
 
 	private class PhotoTitle {
@@ -108,6 +108,15 @@ public class FlickrPhotoDetail {
 
 		private String getUsername() {
 			return username;
+		}
+	}
+
+	private class TagList {
+		@SerializedName("tag")
+		private List<Tag> tags;
+
+		private List<Tag> getTags() {
+			return tags;
 		}
 	}
 
