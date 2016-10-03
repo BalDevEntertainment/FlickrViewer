@@ -2,6 +2,7 @@ package com.baldev.flickrviewer.views.adapters;
 
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 public class FlickrPhotoListAdapter extends RecyclerView.Adapter<FlickrPhotoViewHolder> {
 
+	private List<FlickrPhoto> filteredPhotos = new ArrayList<>();
 	private List<FlickrPhoto> photos = new ArrayList<>();
 
 	private final PublishSubject<FlickrPhoto> onClickSubject = PublishSubject.create();
 
 	public void setPhotos(List<FlickrPhoto> photos) {
 		this.photos = photos;
+		this.filteredPhotos = photos;
 	}
 
 	@Override
@@ -33,7 +39,7 @@ public class FlickrPhotoListAdapter extends RecyclerView.Adapter<FlickrPhotoView
 
 	@Override
 	public void onBindViewHolder(FlickrPhotoViewHolder holder, int position) {
-		final FlickrPhoto photo = photos.get(position);
+		final FlickrPhoto photo = filteredPhotos.get(position);
 		holder.photoThumbnail.setImageURI(photo.getThumbnailURI());
 		holder.photoTitle.setText(photo.getTitle());
 
@@ -51,11 +57,21 @@ public class FlickrPhotoListAdapter extends RecyclerView.Adapter<FlickrPhotoView
 
 	@Override
 	public int getItemCount() {
-		return photos.size();
+		return filteredPhotos.size();
 	}
 
-	public String getItemTitle(int position) {
-		return photos.get(position).getID();
+	public void filter(final String query) {
+		this.filteredPhotos = Observable.from(photos)
+				.filter(new Func1<FlickrPhoto, Boolean>() {
+					@Override
+					public Boolean call(FlickrPhoto flickrPhoto) {
+						return flickrPhoto.getTitle() != null && flickrPhoto.getTitle().toLowerCase().contains(query.toLowerCase());
+					}
+				})
+				.toList()
+				.observeOn(Schedulers.computation())
+				.toBlocking()
+				.single();
+		this.notifyDataSetChanged();
 	}
-
 }

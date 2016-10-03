@@ -9,5 +9,7 @@
     <string name="item_detail_description">"Description"</string>
     <string name="item_detail_views">"Views"</string>
     <string name="item_detail_tags">"Tags"</string>
+    <string name="app_label">no seee</string>
+    <string name="search_hint">Search</string>
 
 </resources>

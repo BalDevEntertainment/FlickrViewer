@@ -31,5 +31,6 @@ public interface MainMVP {
 		void onRefresh();
 
 		void setOnItemClicked(FlickrPhotoListAdapter adapter);
+
 	}
 }

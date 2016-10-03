@@ -69,4 +69,7 @@ dependencies {
 
     //Fresco
     compile 'com.facebook.fresco:fresco:0.14.0'
+
+    //Search Bar
+    compile 'com.android.support:appcompat-v7:24.2.1'
 }
