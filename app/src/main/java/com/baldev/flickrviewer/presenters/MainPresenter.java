@@ -1,11 +1,13 @@
 package com.baldev.flickrviewer.presenters;
 
 import com.baldev.flickrviewer.model.DTOs.FlickrPageResponse;
+import com.baldev.flickrviewer.model.DTOs.FlickrPhoto;
 import com.baldev.flickrviewer.model.DTOs.FlickrResponse;
 import com.baldev.flickrviewer.model.DataManager;
 import com.baldev.flickrviewer.mvp.MainMVP;
 import com.baldev.flickrviewer.mvp.MainMVP.Model;
 import com.baldev.flickrviewer.mvp.MainMVP.View;
+import com.baldev.flickrviewer.views.adapters.FlickrPhotoListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,17 @@ public class MainPresenter implements MainMVP.Presenter {
 	@Override
 	public void onRefresh() {
 		this.getFlickrPhotos();
+	}
+
+
+	@Override
+	public void setOnItemClicked(FlickrPhotoListAdapter adapter) {
+		adapter.getPositionClicks().subscribe(new Action1<FlickrPhoto>() {
+			@Override
+			public void call(FlickrPhoto flickrPhoto) {
+				view.startDetailActivity(flickrPhoto);
+			}
+		});
 	}
 
 }

@@ -1,8 +1,9 @@
 package com.baldev.flickrviewer.views;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -21,7 +22,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends Activity implements MainMVP.View {
+public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
 	@BindView(R.id.list_results) RecyclerView photoList;
 	@BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
@@ -40,6 +41,8 @@ public class MainActivity extends Activity implements MainMVP.View {
 		this.setupComponent();
 		this.setupAdapter();
 		this.swipeRefreshLayout.setOnRefreshListener(this.presenter);
+		this.swipeRefreshLayout.setRefreshing(true);
+		this.presenter.getFlickrPhotos();
 	}
 
 	protected void setupComponent() {
@@ -57,6 +60,16 @@ public class MainActivity extends Activity implements MainMVP.View {
 	}
 
 	@Override
+	public void startDetailActivity(FlickrPhoto flickrPhoto) {
+		Intent intent = new Intent(this, ItemDetailActivity.class);
+		intent.putExtra(ItemDetailActivity.PHOTO_ID, flickrPhoto.getID());
+		intent.putExtra(ItemDetailActivity.PHOTO_TITLE, flickrPhoto.getTitle());
+		intent.putExtra(ItemDetailActivity.PHOTO_URL, flickrPhoto.getURI().toString());
+		startActivity(intent);
+	}
+
+
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		this.presenter.unsubscribe();
@@ -66,6 +79,9 @@ public class MainActivity extends Activity implements MainMVP.View {
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 		this.photoList.setLayoutManager(layoutManager);
 		this.photoList.setAdapter(this.adapter);
+		this.presenter.setOnItemClicked(this.adapter);
+
 	}
+
 
 }

@@ -6,7 +6,7 @@ import com.baldev.flickrviewer.views.MainActivity;
 import dagger.Component;
 
 @Component(
-		modules = MainModule.class
+		modules={MainModule.class}
 )
 public interface MainComponent {
 	void inject(MainActivity activity);
