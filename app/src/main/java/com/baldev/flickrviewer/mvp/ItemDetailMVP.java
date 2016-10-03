@@ -9,7 +9,7 @@ public interface ItemDetailMVP {
 	}
 
 	interface View {
-		void onPhotoLoaded(FlickrPhotoDetail photo);
+		void onDetailsLoaded(FlickrPhotoDetail photo);
 	}
 
 	interface Presenter {

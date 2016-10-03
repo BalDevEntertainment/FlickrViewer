@@ -1,28 +1,14 @@
 package com.baldev.flickrviewer.model.DTOs;
 
-import android.net.Uri;
-
+import com.baldev.flickrviewer.utils.FlickrViewerUtils;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class FlickrPhotoDetail {
 
-	private static final String URI_PROTOCOL = "https";
-	private static final String URI_FARM = "farm";
-	private static final String URI_FLICKR = "staticflickr.com";
-	private static final String URI_FORMAT = "jpg";
-
-	/**
-	 * JSON Response example:
-	 * "id":"29445569114",
-	 * "owner":"81917335@N00",
-	 * "secret":"433a2bac02",
-	 * "server":"8118",
-	 * "farmId":9,
-	 * "title":"P1010105",
-	 * "ispublic":1,
-	 * "isfriend":0,
-	 * "isfamily":0
-	 */
+	@SerializedName("id")
+	private String ID;
 
 	@SerializedName("title")
 	private PhotoTitle title;
@@ -36,53 +22,101 @@ public class FlickrPhotoDetail {
 	@SerializedName("secret")
 	private String secret;
 
-	@SerializedName("id")
-	private String ID;
+	@SerializedName("dateuploaded")
+	private String timestamp;
 
-	public String getTitle() {
-		return title.getText();
+	@SerializedName("owner")
+	private Owner owner;
+
+	@SerializedName("description")
+	private Description description;
+
+	@SerializedName("views")
+	private int views;
+
+	public List<Tag> getTags() {
+		return tags;
 	}
 
+	@SerializedName("tags")
+	private List<Tag> tags;
+
 	public String getID() {
-		return ID;
+		return this.ID;
+	}
+
+	public String getTitle() {
+		//TODO implement nullable pattern
+		return this.title.getText();
 	}
 
 	private String getFarmId() {
-		return farmId;
+		return this.farmId;
 	}
 
 	private String getServerId() {
-		return serverId;
+		return this.serverId;
 	}
 
 	private String getSecret() {
-		return secret;
+		return this.secret;
 	}
 
-	/**
-	 * URL Example:
-	 * https://farm{farmId-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-	 */
-	public Uri getURI() {
-		String url = String.format("%s://%s%s.%s/%s/%s_%s.%s",
-				URI_PROTOCOL,
-				URI_FARM,
-				this.getFarmId(),
-				URI_FLICKR,
-				this.getServerId(),
-				getID(),
-				this.getSecret(),
-				URI_FORMAT);
+	private String getTimestamp() {
+		return this.timestamp;
+	}
 
-		return Uri.parse(url);
+	public String getFormattedDate() {
+		return FlickrViewerUtils.formatEpoch(this.getTimestamp());
+	}
+
+	public String getOwner() {
+		//TODO implement nullable pattern
+		return this.owner.getUsername();
+	}
+
+	public String getDescription() {
+		//TODO implement nullable pattern
+		return description.getText();
+	}
+
+	public int getViews() {
+		return views;
 	}
 
 	private class PhotoTitle {
-		public String getText() {
-			return content;
-		}
-
 		@SerializedName("_content")
 		private String content;
+
+		private String getText() {
+			return content;
+		}
+	}
+
+	private class Description {
+		@SerializedName("_content")
+		private String content;
+
+		private String getText() {
+			return content;
+		}
+	}
+
+	private class Owner {
+		@SerializedName("username")
+		private String username;
+
+		private String getUsername() {
+			return username;
+		}
+	}
+
+	private class Tag {
+		@SerializedName("raw")
+		private String rawTag;
+
+		private String getRawTag() {
+			return rawTag;
+		}
 	}
 }

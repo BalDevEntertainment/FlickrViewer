@@ -53,8 +53,8 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailM
 	}
 
 	@Override
-	public void onPhotoLoaded(FlickrPhotoDetail photo) {
-		//TODO
+	public void onDetailsLoaded(FlickrPhotoDetail photo) {
+
 	}
 
 	private void setAlreadyRetrievedData() {
