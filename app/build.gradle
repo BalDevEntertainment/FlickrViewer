@@ -4,6 +4,9 @@ apply plugin: 'android-apt'
 android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
+    applicationVariants.all { variant ->
+        variant.buildConfigField "String", "FLICKR_API_KEY", "\"" + getApiKey() + "\""
+    }
     defaultConfig {
         applicationId "com.baldev.flickrviewer"
         minSdkVersion 16
@@ -26,6 +29,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+def getApiKey() {
+    def Properties props = new Properties()
+    File configFile = file('secrets.properties')
+    props.load(new FileInputStream(configFile))
+    return props['API_KEY']
 }
 
 dependencies {

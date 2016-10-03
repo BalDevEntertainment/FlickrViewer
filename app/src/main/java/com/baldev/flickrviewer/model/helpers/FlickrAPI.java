@@ -1,7 +1,6 @@
 package com.baldev.flickrviewer.model.helpers;
 
 
-import com.baldev.flickrviewer.model.DTOs.FlickrPhoto;
 import com.baldev.flickrviewer.model.DTOs.FlickrResponse;
 import com.baldev.flickrviewer.model.DTOs.FlickrSingleElementResponse;
 

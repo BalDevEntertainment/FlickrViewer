@@ -1,7 +1,7 @@
 package com.baldev.flickrviewer.model;
 
 
-import com.baldev.flickrviewer.model.DTOs.FlickrPhoto;
+import com.baldev.flickrviewer.BuildConfig;
 import com.baldev.flickrviewer.model.DTOs.FlickrResponse;
 import com.baldev.flickrviewer.model.DTOs.FlickrSingleElementResponse;
 import com.baldev.flickrviewer.model.helpers.FlickrAPI;
@@ -11,7 +11,7 @@ import rx.Observable;
 
 public class DataManager {
 
-	private static final String API_KEY = "fabd0db4e704a565860a88a4efd7d85c";
+	private static final String API_KEY = BuildConfig.FLICKR_API_KEY; //Change for provided API KEY, used to avoid publishing API key on github.
 	private static final String GET_PUBLIC_PHOTOS_METHOD = "flickr.photos.getRecent";
 	private static final String GET_PHOTO_BY_ID_PHOTOS_METHOD = "flickr.photos.getInfo";
 
