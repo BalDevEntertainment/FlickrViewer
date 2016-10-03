@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 	public void onPhotosLoaded(List<FlickrPhoto> photos) {
 		this.swipeRefreshLayout.setRefreshing(false);
 		this.adapter.setPhotos(photos);
+		this.adapter.filter(searchView.getQuery().toString());
 		this.adapter.notifyDataSetChanged();
 	}
 
