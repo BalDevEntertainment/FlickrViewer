@@ -3,7 +3,9 @@ package com.baldev.flickrviewer.views;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,8 +49,7 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 		this.setupComponent();
 		this.setupAdapter();
 		this.setupSearchView();
-		this.swipeRefreshLayout.setOnRefreshListener(this.presenter);
-		this.swipeRefreshLayout.setRefreshing(true);
+		this.setupSwipeRefreshLayout();
 		this.presenter.getFlickrPhotos();
 	}
 
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 		this.presenter.unsubscribe();
 	}
 
-
 	private void setupAdapter() {
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 		this.photoList.setLayoutManager(layoutManager);
@@ -95,10 +95,17 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 		this.presenter.setOnItemClicked(this.adapter);
 	}
 
+
 	private void setupSearchView() {
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 		this.searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		this.searchView.setOnQueryTextListener(this);
+	}
+
+	private void setupSwipeRefreshLayout() {
+		this.swipeRefreshLayout.setOnRefreshListener(this.presenter);
+		this.swipeRefreshLayout.setRefreshing(true);
+		this.swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary));
 	}
 
 	@Override
