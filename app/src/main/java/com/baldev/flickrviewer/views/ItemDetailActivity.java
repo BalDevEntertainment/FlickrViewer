@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.baldev.flickrviewer.R;
@@ -19,6 +21,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemSelected;
 
 public class ItemDetailActivity extends AppCompatActivity implements ItemDetailMVP.View {
 
@@ -45,7 +49,11 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailM
 		this.setSupportActionBar(toolbar);
 		ButterKnife.bind(this);
 		this.setupComponent();
-
+		this.setSupportActionBar(toolbar);
+		if (this.getSupportActionBar() != null) {
+			this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+			this.getSupportActionBar().setDisplayShowHomeEnabled(true);
+		}
 		this.setAlreadyRetrievedData();
 
 		String photoId = getIntent().getStringExtra(PHOTO_ID);
@@ -57,6 +65,17 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailM
 				.itemDetailModule(new ItemDetailModule(this))
 				.build()
 				.inject(this);
+	}
+
+	//Butterknife doesn't have an annotation for this.
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				onBackPressed();
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
