@@ -80,6 +80,21 @@ public class FlickrPhoto {
 		return Uri.parse(url);
 	}
 
+	public Uri getPreviewURI() {
+		String url = String.format("%s://%s%s.%s/%s/%s_%s_%s.%s",
+				URI_PROTOCOL,
+				URI_FARM,
+				this.getFarmId(),
+				URI_FLICKR,
+				this.getServerId(),
+				getID(),
+				this.getSecret(),
+				"z",
+				URI_FORMAT);
+
+		return Uri.parse(url);
+	}
+
 	public Uri getThumbnailURI() {
 		String url = String.format("%s://%s%s.%s/%s/%s_%s_%s.%s",
 				URI_PROTOCOL,

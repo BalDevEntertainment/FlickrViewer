@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.baldev.flickrviewer.R;
 import com.baldev.flickrviewer.model.DTOs.FlickrPhoto;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +40,15 @@ public class FlickrPhotoListAdapter extends RecyclerView.Adapter<FlickrPhotoView
 	@Override
 	public void onBindViewHolder(FlickrPhotoViewHolder holder, int position) {
 		final FlickrPhoto photo = filteredPhotos.get(position);
-		holder.photoThumbnail.setImageURI(photo.getThumbnailURI());
-		holder.photoTitle.setText(photo.getTitle());
+		holder.photoThumbnail.setImageURI(photo.getPreviewURI());
+
+		String title = photo.getTitle();
+		if(title == null || title.trim().equals("")){
+			holder.photoTitle.setVisibility(View.GONE);
+		} else {
+			holder.photoTitle.setVisibility(View.VISIBLE);
+			holder.photoTitle.setText(title);
+		}
 
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -47,6 +56,11 @@ public class FlickrPhotoListAdapter extends RecyclerView.Adapter<FlickrPhotoView
 				onClickSubject.onNext(photo);
 			}
 		});
+
+		YoYo.with(Techniques.Landing)
+				.duration(300)
+				.playOn(holder.getRootView());
+
 	}
 
 	public Observable<FlickrPhoto> getPositionClicks() {

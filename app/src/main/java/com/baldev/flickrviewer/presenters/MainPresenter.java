@@ -45,6 +45,7 @@ public class MainPresenter implements MainMVP.Presenter {
 				}, new Action1<Throwable>() {
 					@Override
 					public void call(Throwable throwable) {
+						view.onPhotosLoaded(new ArrayList<FlickrPhoto>());
 						throwable.printStackTrace();
 					}
 				});
