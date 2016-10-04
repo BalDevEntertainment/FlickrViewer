@@ -1,5 +1,14 @@
 # FlickrViewer
 
+## [IMPORTANT]
+
+Create a file called secrets.properties with the following structure:
+
+FLICKR_API_KEY="the_provided_api_key"
+
+This is to avoid publishing the api key on a public repo.
+
+
 ## [TODO]
 ### Optional
 **- GridView mode.**
