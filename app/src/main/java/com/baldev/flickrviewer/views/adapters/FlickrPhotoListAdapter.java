@@ -25,10 +25,16 @@ public class FlickrPhotoListAdapter extends RecyclerView.Adapter<FlickrPhotoView
 	private List<FlickrPhoto> photos = new ArrayList<>();
 
 	private final PublishSubject<FlickrPhoto> onClickSubject = PublishSubject.create();
+	private String filterQuery = "";
 
-	public void setPhotos(List<FlickrPhoto> photos) {
-		this.photos = photos;
-		this.filteredPhotos = photos;
+	public void addPhotos(List<FlickrPhoto> photos) {
+		this.photos.addAll(photos);
+		List<FlickrPhoto> newlyAddedFilteredPhotos = filter(photos);
+		for (FlickrPhoto photo : newlyAddedFilteredPhotos) {
+			int position = this.filteredPhotos.size();
+			this.filteredPhotos.add(position, photo);
+			this.notifyItemInserted(position);
+		}
 	}
 
 	@Override
@@ -43,7 +49,7 @@ public class FlickrPhotoListAdapter extends RecyclerView.Adapter<FlickrPhotoView
 		holder.photoThumbnail.setImageURI(photo.getPreviewURI());
 
 		String title = photo.getTitle();
-		if(title == null || title.trim().equals("")){
+		if (title == null || title.trim().equals("")) {
 			holder.photoTitle.setVisibility(View.GONE);
 		} else {
 			holder.photoTitle.setVisibility(View.VISIBLE);
@@ -72,18 +78,23 @@ public class FlickrPhotoListAdapter extends RecyclerView.Adapter<FlickrPhotoView
 		return filteredPhotos.size();
 	}
 
-	public void filter(final String query) {
-		this.filteredPhotos = Observable.from(photos)
+	public void setFilterQuery(String query) {
+		this.filterQuery = query;
+		this.filteredPhotos = filter(photos);
+		this.notifyDataSetChanged();
+	}
+
+	private List<FlickrPhoto> filter(List<FlickrPhoto> photos) {
+		return Observable.from(photos)
 				.filter(new Func1<FlickrPhoto, Boolean>() {
 					@Override
 					public Boolean call(FlickrPhoto flickrPhoto) {
-						return flickrPhoto.getTitle() != null && flickrPhoto.getTitle().toLowerCase().contains(query.toLowerCase());
+						return flickrPhoto.getTitle() != null && flickrPhoto.getTitle().toLowerCase().contains(filterQuery.toLowerCase());
 					}
 				})
 				.toList()
 				.observeOn(Schedulers.computation())
 				.toBlocking()
 				.single();
-		this.notifyDataSetChanged();
 	}
 }

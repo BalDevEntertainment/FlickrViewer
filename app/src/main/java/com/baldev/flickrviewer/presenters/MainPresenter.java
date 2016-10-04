@@ -33,7 +33,12 @@ public class MainPresenter implements MainMVP.Presenter {
 
 	@Override
 	public void getFlickrPhotos() {
-		final Subscription subscription = DataManager.getPhotos()
+		this.getFlickrPhotos(1);
+	}
+
+	@Override
+	public void getFlickrPhotos(int page) {
+		final Subscription subscription = DataManager.getPhotos(page)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(new Action1<FlickrResponse>() {

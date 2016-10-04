@@ -25,6 +25,8 @@ public interface MainMVP {
 	interface Presenter extends OnRefreshListener {
 		void getFlickrPhotos();
 
+		void getFlickrPhotos(int page);
+
 		void unsubscribe();
 
 		@Override

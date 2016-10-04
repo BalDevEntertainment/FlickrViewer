@@ -3,7 +3,6 @@ package com.baldev.flickrviewer.views;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources.Theme;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -51,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 		this.setupSearchView();
 		this.setupSwipeRefreshLayout();
 		this.presenter.getFlickrPhotos();
+
+
 	}
 
 	protected void setupComponent() {
@@ -63,9 +64,7 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 	@Override
 	public void onPhotosLoaded(List<FlickrPhoto> photos) {
 		this.swipeRefreshLayout.setRefreshing(false);
-		this.adapter.setPhotos(photos);
-		this.adapter.filter(searchView.getQuery().toString());
-		this.adapter.notifyDataSetChanged();
+		this.adapter.addPhotos(photos);
 	}
 
 	@Override
@@ -93,6 +92,17 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 		this.photoList.setLayoutManager(layoutManager);
 		this.photoList.setAdapter(this.adapter);
 		this.presenter.setOnItemClicked(this.adapter);
+
+		this.photoList.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				customLoadMoreDataFromApi(page);
+			}
+		});
+	}
+
+	private void customLoadMoreDataFromApi(int page) {
+		this.presenter.getFlickrPhotos(page);
 	}
 
 
@@ -115,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 
 	@Override
 	public boolean onQueryTextChange(final String query) {
-		this.adapter.filter(query);
+		this.adapter.setFilterQuery(query);
 		return true;
 	}
 }

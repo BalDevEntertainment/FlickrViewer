@@ -18,8 +18,8 @@ public class DataManager {
 	//TODO inject dependency
 	private static FlickrAPI flickrAPI = FlickrAPIHelper.getInstance().create(FlickrAPI.class);
 
-	public static Observable<FlickrResponse> getPhotos() {
-		return flickrAPI.getPublicPhotos(GET_PUBLIC_PHOTOS_METHOD, API_KEY);
+	public static Observable<FlickrResponse> getPhotos(int page) {
+		return flickrAPI.getPublicPhotos(GET_PUBLIC_PHOTOS_METHOD, API_KEY, page);
 	}
 
 	public static Observable<FlickrSingleElementResponse> getPhotoById(String id) {
