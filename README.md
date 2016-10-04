@@ -20,7 +20,7 @@ _Create Master-Detail view with fragments for Tablets_
 
 ## [Finished]
 
-- List that shows Flickr Photos
+**- List that shows Flickr Photos**
 
 **- Add pull to refresh to the list**
 _Used Native SwipeRefreshLayout_
