@@ -1,6 +1,5 @@
 package com.baldev.flickrviewer.mvp;
 
-import com.baldev.flickrviewer.model.DTOs.FlickrPhoto;
 import com.baldev.flickrviewer.model.DTOs.FlickrPhotoDetail;
 
 public interface ItemDetailMVP {
@@ -13,6 +12,8 @@ public interface ItemDetailMVP {
 	}
 
 	interface Presenter {
+		void unsubscribe();
+
 		void getPhotoDetails(String id);
 	}
 }

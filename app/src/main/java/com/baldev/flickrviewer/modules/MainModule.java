@@ -20,7 +20,7 @@ public class MainModule {
 
 	@Provides
 	public View provideView() {
-		return view;
+		return this.view;
 	}
 
 	@Provides

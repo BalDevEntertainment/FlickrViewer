@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 		this.setupSearchView();
 		this.setupSwipeRefreshLayout();
 		this.presenter.getFlickrPhotos();
-
-
 	}
 
 	protected void setupComponent() {
@@ -83,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		this.presenter.unsubscribe();
+		super.onDestroy();
 	}
 
 	private void setupAdapter() {
@@ -92,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements View, OnQueryText
 		this.photoList.setLayoutManager(layoutManager);
 		this.photoList.setAdapter(this.adapter);
 		this.presenter.setOnItemClicked(this.adapter);
-
 		this.photoList.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {

@@ -6,7 +6,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.baldev.flickrviewer.R;
@@ -21,8 +20,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnItemSelected;
 
 public class ItemDetailActivity extends AppCompatActivity implements ItemDetailMVP.View {
 
@@ -84,7 +81,12 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailM
 		this.owner.setText(photo.getOwner());
 		this.description.setText(photo.getDescription());
 		this.views.setText(String.valueOf(photo.getViewQty()));
-		//this.tags.setText(photo.getTags());
+	}
+
+	@Override
+	protected void onDestroy() {
+		this.presenter.unsubscribe();
+		super.onDestroy();
 	}
 
 	private void setAlreadyRetrievedData() {

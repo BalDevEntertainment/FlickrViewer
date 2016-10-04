@@ -22,7 +22,7 @@ public class DataManager {
 		return flickrAPI.getPublicPhotos(GET_PUBLIC_PHOTOS_METHOD, API_KEY, page);
 	}
 
-	public static Observable<FlickrSingleElementResponse> getPhotoById(String id) {
-		return flickrAPI.getPhotoById(GET_PHOTO_BY_ID_PHOTOS_METHOD, API_KEY, id);
+	public static Observable<FlickrSingleElementResponse> getPhotoDetailsById(String id) {
+		return flickrAPI.getPhotoDetailsById(GET_PHOTO_BY_ID_PHOTOS_METHOD, API_KEY, id);
 	}
 }

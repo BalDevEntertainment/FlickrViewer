@@ -62,6 +62,7 @@ public class FlickrPhotoDetail {
 		return this.timestamp;
 	}
 
+	//TODO move this to the model - remove logic from DTOs
 	public String getUploadedOnFormattedDate() {
 		return FlickrViewerUtils.formatEpoch(this.getTimestamp());
 	}

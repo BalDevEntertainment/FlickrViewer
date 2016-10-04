@@ -19,7 +19,7 @@ public class ItemDetailModule {
 
 	@Provides
 	public View provideView() {
-		return view;
+		return this.view;
 	}
 
 	@Provides

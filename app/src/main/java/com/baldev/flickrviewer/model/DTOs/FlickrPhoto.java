@@ -4,28 +4,12 @@ import android.net.Uri;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 public class FlickrPhoto {
 
 	private static final String URI_PROTOCOL = "https";
 	private static final String URI_FARM = "farm";
 	private static final String URI_FLICKR = "staticflickr.com";
 	private static final String URI_FORMAT = "jpg";
-
-	/**
-	 * JSON Response example:
-	 * "id":"29445569114",
-	 * "owner":"81917335@N00",
-	 * "secret":"433a2bac02",
-	 * "server":"8118",
-	 * "farmId":9,
-	 * "title":"P1010105",
-	 * "ispublic":1,
-	 * "isfriend":0,
-	 * "isfamily":0
-	 */
 
 	@SerializedName("title")
 	private String title;
@@ -62,10 +46,6 @@ public class FlickrPhoto {
 		return secret;
 	}
 
-	/**
-	 * URL Example:
-	 * https://farm{farmId-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-	 */
 	public Uri getURI() {
 		String url = String.format("%s://%s%s.%s/%s/%s_%s.%s",
 				URI_PROTOCOL,

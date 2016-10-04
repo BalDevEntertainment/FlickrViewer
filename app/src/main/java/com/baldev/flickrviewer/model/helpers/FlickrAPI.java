@@ -27,6 +27,6 @@ public interface FlickrAPI {
 	Observable<FlickrResponse> getPublicPhotos(@Query("method") String method, @Query("api_key") String apiKey, @Query("page") int page);
 
 	@GET(FORMATTED_URL)
-	Observable<FlickrSingleElementResponse> getPhotoById(@Query("method") String method, @Query("api_key") String apiKey, @Query("photo_id") String photoId);
+	Observable<FlickrSingleElementResponse> getPhotoDetailsById(@Query("method") String method, @Query("api_key") String apiKey, @Query("photo_id") String photoId);
 
 }

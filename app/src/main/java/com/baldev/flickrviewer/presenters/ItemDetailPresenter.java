@@ -30,7 +30,7 @@ public class ItemDetailPresenter implements ItemDetailMVP.Presenter {
 
 	@Override
 	public void getPhotoDetails(String id) {
-		final Subscription subscription = DataManager.getPhotoById(id)
+		final Subscription subscription = DataManager.getPhotoDetailsById(id)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(new Action1<FlickrSingleElementResponse>() {
@@ -45,5 +45,12 @@ public class ItemDetailPresenter implements ItemDetailMVP.Presenter {
 					}
 				});
 		subscriptions.add(subscription);
+	}
+
+	@Override
+	public void unsubscribe() {
+		for (Subscription subscription : subscriptions) {
+			subscription.unsubscribe();
+		}
 	}
 }

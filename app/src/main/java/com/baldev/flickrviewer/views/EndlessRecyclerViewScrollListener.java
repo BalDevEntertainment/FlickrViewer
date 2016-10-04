@@ -5,30 +5,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
+abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 	private int visibleThreshold = 5;
 	private int currentPage = 1;
 	private int previousTotalItemCount = 0;
 	private boolean loading = true;
 	private int startingPageIndex = 0;
 
-	RecyclerView.LayoutManager mLayoutManager;
+	private RecyclerView.LayoutManager mLayoutManager;
 
-	public EndlessRecyclerViewScrollListener(LinearLayoutManager layoutManager) {
+	EndlessRecyclerViewScrollListener(LinearLayoutManager layoutManager) {
 		this.mLayoutManager = layoutManager;
 	}
 
-	public EndlessRecyclerViewScrollListener(GridLayoutManager layoutManager) {
-		this.mLayoutManager = layoutManager;
-		visibleThreshold = visibleThreshold * layoutManager.getSpanCount();
-	}
-
-	public EndlessRecyclerViewScrollListener(StaggeredGridLayoutManager layoutManager) {
-		this.mLayoutManager = layoutManager;
-		visibleThreshold = visibleThreshold * layoutManager.getSpanCount();
-	}
-
-	public int getLastVisibleItem(int[] lastVisibleItemPositions) {
+	int getLastVisibleItem(int[] lastVisibleItemPositions) {
 		int maxSize = 0;
 		for (int i = 0; i < lastVisibleItemPositions.length; i++) {
 			if (i == 0) {
