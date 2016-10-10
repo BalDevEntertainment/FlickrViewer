@@ -1,11 +1,13 @@
 package com.baldev.flickrviewer.modules;
 
-import com.baldev.flickrviewer.model.Main;
-import com.baldev.flickrviewer.mvp.MainMVP.Model;
+import com.baldev.flickrviewer.model.DataManager;
+import com.baldev.flickrviewer.mvp.DataModel;
 import com.baldev.flickrviewer.mvp.MainMVP.Presenter;
 import com.baldev.flickrviewer.mvp.MainMVP.View;
 import com.baldev.flickrviewer.presenters.MainPresenter;
 import com.baldev.flickrviewer.views.adapters.FlickrPhotoListAdapter;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -23,14 +25,15 @@ public class MainModule {
 		return this.view;
 	}
 
+	@Singleton
 	@Provides
-	public Model provideModel() {
-		return new Main();
+	public DataModel provideModel() {
+		return new DataManager();
 	}
 
 	@Provides
-	public Presenter providePresenter(View view, Model model) {
-		return new MainPresenter(view, model);
+	public Presenter providePresenter(View view, DataModel dataModel) {
+		return new MainPresenter(view, dataModel);
 	}
 
 	@Provides

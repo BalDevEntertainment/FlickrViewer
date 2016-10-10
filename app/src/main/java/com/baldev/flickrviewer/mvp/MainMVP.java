@@ -9,10 +9,6 @@ import java.util.List;
 
 public interface MainMVP {
 
-	interface Model {
-
-	}
-
 	interface View {
 		void onPhotosLoaded(List<FlickrPhoto> photos);
 

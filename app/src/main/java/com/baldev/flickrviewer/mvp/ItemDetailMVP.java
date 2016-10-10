@@ -4,9 +4,6 @@ import com.baldev.flickrviewer.model.DTOs.FlickrPhotoDetail;
 
 public interface ItemDetailMVP {
 
-	interface Model {
-	}
-
 	interface View {
 		void onDetailsLoaded(FlickrPhotoDetail photo);
 	}

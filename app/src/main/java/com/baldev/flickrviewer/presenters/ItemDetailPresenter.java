@@ -1,9 +1,8 @@
 package com.baldev.flickrviewer.presenters;
 
 import com.baldev.flickrviewer.model.DTOs.FlickrSingleElementResponse;
-import com.baldev.flickrviewer.model.DataManager;
+import com.baldev.flickrviewer.mvp.DataModel;
 import com.baldev.flickrviewer.mvp.ItemDetailMVP;
-import com.baldev.flickrviewer.mvp.ItemDetailMVP.Model;
 import com.baldev.flickrviewer.mvp.ItemDetailMVP.View;
 
 import java.util.ArrayList;
@@ -19,18 +18,18 @@ import rx.schedulers.Schedulers;
 public class ItemDetailPresenter implements ItemDetailMVP.Presenter {
 
 	private final View view;
-	private final Model model;
+	private final DataModel dataModel;
 	private List<Subscription> subscriptions = new ArrayList<>();
 
 	@Inject
-	public ItemDetailPresenter(ItemDetailMVP.View view, ItemDetailMVP.Model model) {
+	public ItemDetailPresenter(ItemDetailMVP.View view, DataModel dataModel) {
 		this.view = view;
-		this.model = model;
+		this.dataModel = dataModel;
 	}
 
 	@Override
 	public void getPhotoDetails(String id) {
-		final Subscription subscription = DataManager.getPhotoDetailsById(id)
+		final Subscription subscription = this.dataModel.getPhotoDetailsById(id)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(new Action1<FlickrSingleElementResponse>() {

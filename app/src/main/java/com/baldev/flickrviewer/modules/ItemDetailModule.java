@@ -1,10 +1,12 @@
 package com.baldev.flickrviewer.modules;
 
-
-import com.baldev.flickrviewer.model.ItemDetail;
+import com.baldev.flickrviewer.model.DataManager;
+import com.baldev.flickrviewer.mvp.DataModel;
 import com.baldev.flickrviewer.mvp.ItemDetailMVP;
 import com.baldev.flickrviewer.mvp.ItemDetailMVP.View;
 import com.baldev.flickrviewer.presenters.ItemDetailPresenter;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -23,12 +25,13 @@ public class ItemDetailModule {
 	}
 
 	@Provides
-	public ItemDetailMVP.Model provideModel() {
-		return new ItemDetail();
+	@Singleton
+	public DataModel provideModel() {
+		return new DataManager();
 	}
 
 	@Provides
-	public ItemDetailMVP.Presenter providePresenter(ItemDetailMVP.View view, ItemDetailMVP.Model model) {
+	public ItemDetailMVP.Presenter providePresenter(ItemDetailMVP.View view, DataModel model) {
 		return new ItemDetailPresenter(view, model);
 	}
 

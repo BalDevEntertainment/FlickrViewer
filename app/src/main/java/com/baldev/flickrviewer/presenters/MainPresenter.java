@@ -3,9 +3,8 @@ package com.baldev.flickrviewer.presenters;
 import com.baldev.flickrviewer.model.DTOs.FlickrPageResponse;
 import com.baldev.flickrviewer.model.DTOs.FlickrPhoto;
 import com.baldev.flickrviewer.model.DTOs.FlickrResponse;
-import com.baldev.flickrviewer.model.DataManager;
+import com.baldev.flickrviewer.mvp.DataModel;
 import com.baldev.flickrviewer.mvp.MainMVP;
-import com.baldev.flickrviewer.mvp.MainMVP.Model;
 import com.baldev.flickrviewer.mvp.MainMVP.View;
 import com.baldev.flickrviewer.views.adapters.FlickrPhotoListAdapter;
 
@@ -22,13 +21,13 @@ import rx.schedulers.Schedulers;
 public class MainPresenter implements MainMVP.Presenter {
 
 	private final View view;
-	private final Model model;
+	private final DataModel dataModel;
 	private List<Subscription> subscriptions = new ArrayList<>();
 
 	@Inject
-	public MainPresenter(View view, Model model) {
+	public MainPresenter(View view, DataModel dataModel) {
 		this.view = view;
-		this.model = model;
+		this.dataModel = dataModel;
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class MainPresenter implements MainMVP.Presenter {
 
 	@Override
 	public void getFlickrPhotos(int page) {
-		final Subscription subscription = DataManager.getPhotos(page)
+		final Subscription subscription = this.dataModel.getPhotos(page)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(new Action1<FlickrResponse>() {
